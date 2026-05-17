@@ -1,5 +1,6 @@
 """Auth service — registration, login, token management."""
 
+import logging
 from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
@@ -10,6 +11,8 @@ from app.core.security import (
     hash_password, verify_password,
 )
 from app.models.user import User, RefreshToken
+
+logger = logging.getLogger(__name__)
 
 
 async def register_user(db: AsyncSession, email: str, password: str, first_name: str = "", last_name: str = "") -> User:
@@ -31,7 +34,14 @@ async def register_user(db: AsyncSession, email: str, password: str, first_name:
 
 async def authenticate_user(db: AsyncSession, email: str, password: str) -> User | None:
     user = await db.scalar(select(User).where(User.email == email))
-    if not user or not verify_password(password, user.hashed_password):
+    if not user:
+        logger.warning("Authenticate failed: no user found for email=%s", email)
+        return None
+    if not verify_password(password, user.hashed_password):
+        logger.warning(
+            "Authenticate failed: wrong password for email=%s (stored hash prefix=%s...)",
+            email, user.hashed_password[:20],
+        )
         return None
     return user
 
