@@ -33,6 +33,9 @@ jobs:
       - name: Check imports and syntax
         run: python -c "import ast; ast.parse(open('app/main.py').read())"
 
+      - name: Clean database from previous run
+        run: rm -f stitchcore.db
+
       - name: Start backend server
         run: |
           uvicorn app.main:app --host 127.0.0.1 --port 8000 > /tmp/uvicorn.log 2>&1 &

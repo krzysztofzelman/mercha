@@ -1,9 +1,32 @@
 """Comprehensive API integration test with unique slugs."""
+import time
 import requests
 import uuid
 
 BASE = 'http://localhost:8000/api/v1'
 UNIQ = uuid.uuid4().hex[:8]
+
+
+def wait_for_backend(url: str = "http://localhost:8000/", timeout: int = 60) -> None:
+    """Poll the backend health endpoint until it responds or timeout expires."""
+    start = time.time()
+    while time.time() - start < timeout:
+        try:
+            r = requests.get(url)
+            if r.status_code == 200:
+                elapsed = time.time() - start
+                print(f"Backend ready after {elapsed:.1f}s")
+                return
+        except requests.ConnectionError:
+            pass
+        time.sleep(1)
+    raise RuntimeError(
+        f"Backend not ready after {timeout}s — is the server running on {url}?"
+    )
+
+
+# Wait for backend before running any tests
+wait_for_backend()
 
 # 1. Root
 r = requests.get('http://localhost:8000/')

@@ -9,7 +9,7 @@ Platforma e-commerce dla marki odzieżowo-obuwniczej — uproszczona wersja demo
 | Backend | FastAPI + SQLAlchemy (async) + SQLite (aiosqlite) |
 | Frontend Shop | Vite + React + Tailwind CSS + React Router |
 | Frontend Admin | Vite + React + Material UI + React Router |
-| Auth | JWT (python-jose, passlib, bcrypt) |
+| Auth | JWT (python-jose, bcrypt) |
 | Baza | SQLite (brak PostgreSQL, brak Celery) |
 
 ## Struktura projektu
