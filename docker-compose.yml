@@ -14,7 +14,10 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend-shop:
-    build: ./frontend-shop
+    build:
+      context: ./frontend-shop
+      args:
+        - VITE_API_URL=http://31.3.218.196:8000
     ports:
       - "5173:5173"
     volumes:
@@ -22,7 +25,10 @@ services:
     command: npm run dev -- --host
 
   frontend-admin:
-    build: ./frontend-admin
+    build:
+      context: ./frontend-admin
+      args:
+        - VITE_API_URL=http://31.3.218.196:8000
     ports:
       - "5174:5174"
     volumes:
