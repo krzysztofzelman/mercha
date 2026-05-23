@@ -1,4 +1,4 @@
-"""Async database engine and session factory using aiosqlite."""
+"""Async database engine and session factory using asyncpg (PostgreSQL)."""
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase

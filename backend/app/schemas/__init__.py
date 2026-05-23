@@ -94,6 +94,7 @@ class ProductUpdate(BaseModel):
 
 class ImageResponse(BaseModel):
     id: int
+    product_id: int
     image: str
     alt_text: str
     is_primary: bool
@@ -149,6 +150,7 @@ class OrderCreate(BaseModel):
     shipping_address: str = ""
     shipping_method: str = "pickup"
     notes: str = ""
+    payment_method: str = "cod"
 
 class OrderItemResponse(BaseModel):
     id: int
@@ -172,6 +174,9 @@ class OrderResponse(BaseModel):
     shipping_method: str
     tracking_number: str
     notes: str
+    payment_status: str = "unpaid"
+    payment_method: str = ""
+    payment_id: str = ""
     created_at: datetime | None = None
     items: list[OrderItemResponse] = []
 

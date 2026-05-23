@@ -1,4 +1,4 @@
-"""Alembic environment configuration for async SQLite."""
+"""Alembic environment configuration for async PostgreSQL."""
 
 import asyncio
 from logging.config import fileConfig

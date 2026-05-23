@@ -83,3 +83,38 @@ async def create_variant(db: AsyncSession, product_id: int, data: dict) -> Produ
     await db.commit()
     await db.refresh(variant)
     return variant
+
+
+async def delete_product(db: AsyncSession, product_id: int) -> bool:
+    result = await db.execute(select(Product).where(Product.id == product_id))
+    product = result.scalar_one_or_none()
+    if not product:
+        return False
+    await db.delete(product)
+    await db.commit()
+    return True
+
+
+async def delete_variant(db: AsyncSession, product_id: int, variant_id: int) -> bool:
+    result = await db.execute(
+        select(ProductVariant).where(
+            ProductVariant.id == variant_id,
+            ProductVariant.product_id == product_id,
+        )
+    )
+    variant = result.scalar_one_or_none()
+    if not variant:
+        return False
+    await db.delete(variant)
+    await db.commit()
+    return True
+
+
+async def delete_category(db: AsyncSession, category_id: int) -> bool:
+    result = await db.execute(select(Category).where(Category.id == category_id))
+    category = result.scalar_one_or_none()
+    if not category:
+        return False
+    await db.delete(category)
+    await db.commit()
+    return True

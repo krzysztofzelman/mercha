@@ -1,23 +1,36 @@
 version: "3.8"
 
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: mercha
+      POSTGRES_USER: mercha
+      POSTGRES_PASSWORD: mercha123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   backend:
     build: ./backend
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite+aiosqlite:///./stitchcore.db
+      - DATABASE_URL=postgresql+asyncpg://mercha:mercha123@postgres:5432/mercha
       - SECRET_KEY=change-this-in-production
       - DEBUG=True
     volumes:
       - ./backend:/app
+    depends_on:
+      - postgres
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend-shop:
     build:
       context: ./frontend-shop
       args:
-        - VITE_API_URL=http://31.3.218.196:8000
+        - VITE_API_URL=${API_URL:-http://localhost:8000}
     ports:
       - "5173:5173"
     volumes:
@@ -28,9 +41,12 @@ services:
     build:
       context: ./frontend-admin
       args:
-        - VITE_API_URL=http://31.3.218.196:8000
+        - VITE_API_URL=${API_URL:-http://localhost:8000}
     ports:
       - "5174:5174"
     volumes:
       - ./frontend-admin:/app
     command: npm run dev -- --host
+
+volumes:
+  postgres_data:

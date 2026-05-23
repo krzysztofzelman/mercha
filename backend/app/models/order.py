@@ -26,6 +26,12 @@ class Order(Base):
     shipping_method: Mapped[str] = mapped_column(String(100), default="pickup")
     tracking_number: Mapped[str] = mapped_column(String(100), default="")
     notes: Mapped[str] = mapped_column(Text, default="")
+    payment_status: Mapped[str] = mapped_column(
+        Enum("unpaid", "pending", "paid", "failed", "refunded", name="payment_status"),
+        default="unpaid",
+    )
+    payment_method: Mapped[str] = mapped_column(String(50), default="")
+    payment_id: Mapped[str] = mapped_column(String(255), default="")
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now())
 
