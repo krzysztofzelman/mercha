@@ -1,5 +1,5 @@
 #!/bin/bash
-# StitchCore Backup Script
+# Mercha Backup Script
 set -e
 
 BACKUP_DIR="./backups"

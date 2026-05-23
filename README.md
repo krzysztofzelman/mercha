@@ -1,4 +1,4 @@
-# 🧵 StitchCore — Platforma E-commerce
+# 🧵 Mercha — Platforma E-commerce
 
 [![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -39,7 +39,7 @@ Gotowy do lokalnego uruchomienia przez Docker Compose oraz do wdrożenia na serw
 
 | Sklep kliencki | Panel administracyjny |
 |----------------|-----------------------|
-| ![Shop Screenshot](https://placehold.co/600x400/1a1a2e/e0e0e0?text=Sklep+StitchCore) | ![Admin Screenshot](https://placehold.co/600x400/1a1a2e/e0e0e0?text=Panel+Admina) |
+| ![Shop Screenshot](https://placehold.co/600x400/1a1a2e/e0e0e0?text=Sklep+Mercha) | ![Admin Screenshot](https://placehold.co/600x400/1a1a2e/e0e0e0?text=Panel+Admina) |
 
 > Zrzuty ekranu zostaną wkrótce zastąpione rzeczywistymi obrazami platformy.
 

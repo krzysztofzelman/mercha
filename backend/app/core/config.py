@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    APP_NAME: str = "StitchCore API"
+    APP_NAME: str = "Mercha API"
     DEBUG: bool = True
     DATABASE_URL: str = "sqlite+aiosqlite:///./stitchcore.db"
     SECRET_KEY: str = "change-this-to-a-random-secret-key-in-production"

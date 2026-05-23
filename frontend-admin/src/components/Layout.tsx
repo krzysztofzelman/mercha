@@ -33,7 +33,7 @@ export default function Layout() {
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" sx={{ zIndex: (t) => t.zIndex.drawer + 1 }}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>StitchCore Admin</Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>Mercha Admin</Typography>
           <Typography variant="body2" sx={{ mr: 2 }}>{user?.email}</Typography>
           <IconButton color="inherit" onClick={handleLogout}><LogoutIcon /></IconButton>
         </Toolbar>

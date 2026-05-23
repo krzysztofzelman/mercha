@@ -25,7 +25,7 @@ export default function Login() {
   return (
     <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" bgcolor="#f1f5f9">
       <Paper sx={{ p: 4, maxWidth: 400, width: '100%' }}>
-        <Typography variant="h5" fontWeight={700} textAlign="center" mb={3}>StitchCore Admin</Typography>
+        <Typography variant="h5" fontWeight={700} textAlign="center" mb={3}>Mercha Admin</Typography>
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         <form onSubmit={handleSubmit}>
           <TextField label="Email" fullWidth required sx={{ mb: 2 }} value={email} onChange={(e) => setEmail(e.target.value)} />

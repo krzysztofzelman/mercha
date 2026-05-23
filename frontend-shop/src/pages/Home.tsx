@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-brand-600 to-brand-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">StitchCore</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Mercha</h1>
           <p className="text-xl text-brand-100 mb-8 max-w-2xl mx-auto">
             Nowoczesna odzież i obuwie. Wyraź swój styl z naszą kolekcją.
           </p>

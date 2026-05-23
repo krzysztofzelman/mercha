@@ -43,7 +43,7 @@ async def seed(db: AsyncSession) -> None:
             "price": 79.99,
             "compare_price": 99.99,
             "category_id": cat_map["Odzież"],
-            "brand": "StitchCore",
+            "brand": "Mercha",
         },
         {
             "name": "Jeansy Slim Fit",
@@ -52,7 +52,7 @@ async def seed(db: AsyncSession) -> None:
             "price": 199.99,
             "compare_price": None,
             "category_id": cat_map["Odzież"],
-            "brand": "StitchCore",
+            "brand": "Mercha",
         },
         {
             "name": "Buty Sportowe Air",
@@ -61,7 +61,7 @@ async def seed(db: AsyncSession) -> None:
             "price": 349.99,
             "compare_price": 429.99,
             "category_id": cat_map["Obuwie"],
-            "brand": "StitchCore",
+            "brand": "Mercha",
         },
         {
             "name": "Plecak Miejski",
@@ -70,7 +70,7 @@ async def seed(db: AsyncSession) -> None:
             "price": 159.99,
             "compare_price": None,
             "category_id": cat_map["Akcesoria"],
-            "brand": "StitchCore",
+            "brand": "Mercha",
         },
         {
             "name": "Czapka Beanie",
@@ -79,7 +79,7 @@ async def seed(db: AsyncSession) -> None:
             "price": 49.99,
             "compare_price": 59.99,
             "category_id": cat_map["Akcesoria"],
-            "brand": "StitchCore",
+            "brand": "Mercha",
         },
     ]
     products = [Product(**p) for p in products_data]

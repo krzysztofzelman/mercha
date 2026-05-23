@@ -10,7 +10,7 @@ from app.models.user import User
 
 logger = logging.getLogger(__name__)
 
-ADMIN_EMAIL = "admin@stitchcore.pl"
+ADMIN_EMAIL = "admin@mercha.pl"
 ADMIN_PASSWORD = "admin123"
 
 
@@ -28,7 +28,7 @@ async def init_admin(db: AsyncSession) -> None:
         email=ADMIN_EMAIL,
         hashed_password=hash_password(ADMIN_PASSWORD),
         first_name="Admin",
-        last_name="StitchCore",
+        last_name="Mercha",
         role="admin",
         is_active=True,
     )

@@ -1,9 +1,9 @@
 #!/bin/bash
-# StitchCore — setup script
+# Mercha — setup script
 
 set -e
 
-echo "=== StitchCore Setup ==="
+echo "=== Mercha Setup ==="
 
 # Backend
 echo "[1/3] Backend..."

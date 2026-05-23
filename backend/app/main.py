@@ -39,7 +39,7 @@ async def init_admin_user():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting StitchCore API...")
+    logger.info("Starting Mercha API...")
     await run_alembic_migration()
     await init_admin_user()
     yield
@@ -61,4 +61,4 @@ app.include_router(api_router)
 
 @app.get("/")
 async def root():
-    return {"message": "StitchCore API", "version": "1.0.0"}
+    return {"message": "Mercha API", "version": "1.0.0"}
