@@ -72,7 +72,7 @@ print(f'1. ROOT: {r.json()}')
 # ═══════════════════════════════════════════════════
 # 2. Register duplicate
 # ═══════════════════════════════════════════════════
-email = f'dup-{UNIQ}@test.pl'
+email = 'testuser@mercha.pl'
 r = req('POST', f'{BASE}/auth/register', json={'email': email, 'password': 'test123'})
 assert r.status_code == 200, f'[2a] First register failed: {r.status_code} {r.text[:200]}'
 r = req('POST', f'{BASE}/auth/register', json={'email': email, 'password': 'test123'})
