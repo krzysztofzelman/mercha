@@ -81,7 +81,8 @@ jobs:
           done
 
       - name: Run API tests
-        run: python ../test_all.py
+        run: |
+          python ../test_all.py || (echo "=== BACKEND LOGS ===" && cat /tmp/uvicorn.log && exit 1)
         env:
           PYTHONUNBUFFERED: "1"
 

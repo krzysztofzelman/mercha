@@ -73,9 +73,11 @@ print(f'1. ROOT: {r.json()}')
 # 2. Register duplicate
 # ═══════════════════════════════════════════════════
 email = 'testuser@mercha.pl'
+print(f"[DEBUG] Attempting to register: {email}")
 r = req('POST', f'{BASE}/auth/register', json={'email': email, 'password': 'test123'})
 assert r.status_code == 200, f'[2a] First register failed: {r.status_code} {r.text[:200]}'
 r = req('POST', f'{BASE}/auth/register', json={'email': email, 'password': 'test123'})
+print(f"[DEBUG] Response body: {r.text}")
 assert r.status_code == 400, f'[2b] Duplicate register should be 400, got {r.status_code}: {r.text[:200]}'
 print(f'2. REGISTER duplicate: {r.status_code} - {r.json()["detail"]}')
 
