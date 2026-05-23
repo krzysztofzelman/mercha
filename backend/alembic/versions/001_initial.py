@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column("last_name", sa.String(100), server_default=""),
         sa.Column("phone", sa.String(20), server_default=""),
         sa.Column("role", sa.Enum("admin", "customer", name="user_role"), server_default="customer"),
-        sa.Column("is_active", sa.Boolean(), server_default="1"),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.true()),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now()),
         sa.Column("updated_at", sa.DateTime(), server_default=sa.func.now()),
     )
@@ -46,7 +46,7 @@ def upgrade() -> None:
         sa.Column("description", sa.Text(), server_default=""),
         sa.Column("image", sa.String(500), server_default=""),
         sa.Column("parent_id", sa.Integer(), sa.ForeignKey("categories.id"), nullable=True),
-        sa.Column("is_active", sa.Boolean(), server_default="1"),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.true()),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now()),
     )
     op.create_table(
@@ -59,7 +59,7 @@ def upgrade() -> None:
         sa.Column("compare_price", sa.Numeric(12, 2), nullable=True),
         sa.Column("category_id", sa.Integer(), sa.ForeignKey("categories.id"), nullable=True),
         sa.Column("brand", sa.String(100), server_default=""),
-        sa.Column("is_active", sa.Boolean(), server_default="1"),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.true()),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now()),
         sa.Column("updated_at", sa.DateTime(), server_default=sa.func.now()),
     )
@@ -71,7 +71,7 @@ def upgrade() -> None:
         sa.Column("size", sa.String(20), server_default=""),
         sa.Column("color", sa.String(50), server_default=""),
         sa.Column("price_adjustment", sa.Numeric(12, 2), server_default="0"),
-        sa.Column("is_active", sa.Boolean(), server_default="1"),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.true()),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now()),
     )
     op.create_table(
@@ -80,7 +80,7 @@ def upgrade() -> None:
         sa.Column("product_id", sa.Integer(), sa.ForeignKey("products.id")),
         sa.Column("image", sa.String(500)),
         sa.Column("alt_text", sa.String(255), server_default=""),
-        sa.Column("is_primary", sa.Boolean(), server_default="0"),
+        sa.Column("is_primary", sa.Boolean(), server_default=sa.false()),
     )
     op.create_table(
         "orders",
@@ -116,7 +116,7 @@ def upgrade() -> None:
         sa.Column("rack", sa.String(20), server_default=""),
         sa.Column("shelf", sa.String(20), server_default=""),
         sa.Column("description", sa.String(255), server_default=""),
-        sa.Column("is_active", sa.Boolean(), server_default="1"),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.true()),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now()),
     )
     op.create_table(
