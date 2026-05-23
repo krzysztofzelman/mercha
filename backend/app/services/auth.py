@@ -53,7 +53,7 @@ async def create_tokens(db: AsyncSession, user: User) -> dict:
     rt = RefreshToken(
         token=refresh,
         user_id=user.id,
-        expires_at=datetime.now(timezone.utc) + timedelta(days=7),
+        expires_at=datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(days=7),
     )
     db.add(rt)
     await db.commit()
