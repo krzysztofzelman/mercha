@@ -12,6 +12,7 @@ interface ProductItem {
   brand: string
   category_name: string | null
   has_variants: boolean
+  image?: string | null
 }
 
 export default function Home() {

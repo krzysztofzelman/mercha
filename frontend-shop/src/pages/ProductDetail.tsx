@@ -12,6 +12,13 @@ interface Variant {
   is_active: boolean
 }
 
+interface ProductImage {
+  id: number
+  image: string
+  alt_text: string
+  is_primary: boolean
+}
+
 interface Product {
   id: number
   name: string
@@ -20,6 +27,7 @@ interface Product {
   compare_price: number | null
   brand: string
   variants: Variant[]
+  images: ProductImage[]
 }
 
 export default function ProductDetail() {
@@ -28,12 +36,15 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true)
   const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null)
   const [qty, setQty] = useState(1)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const { addItem } = useCart()
 
   useEffect(() => {
     if (!id) return
     productsApi.get(Number(id)).then(({ data }) => {
       setProduct(data)
+      const primary = data.images?.find((img: ProductImage) => img.is_primary) || data.images?.[0]
+      if (primary) setSelectedImage(primary.image)
       if (data.variants?.length > 0) setSelectedVariant(data.variants[0])
     }).finally(() => setLoading(false))
   }, [id])
@@ -59,8 +70,27 @@ export default function ProductDetail() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <Link to="/products" className="text-sm text-brand-600 hover:underline mb-4 inline-block">&larr; Powrót</Link>
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="h-80 bg-gradient-to-br from-brand-100 to-brand-200 rounded-lg flex items-center justify-center">
-          <span className="text-6xl">🧵</span>
+        <div>
+          {selectedImage ? (
+            <img src={selectedImage} alt={product.name} className="w-full h-80 object-cover rounded-lg" />
+          ) : (
+            <div className="h-80 bg-gradient-to-br from-brand-100 to-brand-200 rounded-lg flex items-center justify-center">
+              <span className="text-6xl">🧵</span>
+            </div>
+          )}
+          {product.images.length > 1 && (
+            <div className="flex gap-2 mt-3">
+              {product.images.map((img) => (
+                <button
+                  key={img.id}
+                  onClick={() => setSelectedImage(img.image)}
+                  className={`w-16 h-16 rounded border-2 overflow-hidden ${selectedImage === img.image ? 'border-brand-600' : 'border-secondary-200'}`}
+                >
+                  <img src={img.image} alt={img.alt_text} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <div>
           <h1 className="text-3xl font-bold text-secondary-800 mb-2">{product.name}</h1>

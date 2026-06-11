@@ -131,6 +131,7 @@ class ProductListItem(BaseModel):
     brand: str
     category_name: str | None = None
     has_variants: bool = False
+    image: str | None = None
 
     class Config:
         from_attributes = True

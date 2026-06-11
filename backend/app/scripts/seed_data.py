@@ -1,4 +1,4 @@
-"""Seed the database with sample data — categories, products, variants, locations."""
+"""Seed the database with sample data — categories, products, variants, locations, images."""
 
 import asyncio
 import logging
@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import async_session_factory
-from app.models.product import Category, Product, ProductVariant
+from app.models.product import Category, Product, ProductImage, ProductVariant
 from app.models.inventory import WarehouseLocation, Inventory
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,7 @@ PRODUCTS = [
         "compare_price": 109.99,
         "category": "Koszulki",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "TSH-BIA-S",   "size": "S",  "color": "Biały"},
             {"sku": "TSH-BIA-M",   "size": "M",  "color": "Biały"},
@@ -56,6 +57,7 @@ PRODUCTS = [
         "compare_price": 159.99,
         "category": "Koszulki",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1594930328604-0e1cd9c45f31?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "PLO-BIA-S",   "size": "S",  "color": "Biały"},
             {"sku": "PLO-BIA-M",   "size": "M",  "color": "Biały"},
@@ -77,6 +79,7 @@ PRODUCTS = [
         "compare_price": None,
         "category": "Koszulki",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "KOS-BIA-S",   "size": "S",  "color": "Biały"},
             {"sku": "KOS-BIA-M",   "size": "M",  "color": "Biały"},
@@ -99,6 +102,7 @@ PRODUCTS = [
         "compare_price": 249.99,
         "category": "Bluzy",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "BLK-CZR-S",   "size": "S",  "color": "Czarny"},
             {"sku": "BLK-CZR-M",   "size": "M",  "color": "Czarny"},
@@ -120,6 +124,7 @@ PRODUCTS = [
         "compare_price": 219.99,
         "category": "Bluzy",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "BLZ-CZR-S",   "size": "S",  "color": "Czarny"},
             {"sku": "BLZ-CZR-M",   "size": "M",  "color": "Czarny"},
@@ -140,6 +145,7 @@ PRODUCTS = [
         "compare_price": None,
         "category": "Bluzy",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "HOO-CZR-M",   "size": "M",  "color": "Czarny"},
             {"sku": "HOO-CZR-L",   "size": "L",  "color": "Czarny"},
@@ -161,6 +167,7 @@ PRODUCTS = [
         "compare_price": 249.99,
         "category": "Spodnie",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "JNS-CIE-30", "size": "30", "color": "Ciemny"},
             {"sku": "JNS-CIE-32", "size": "32", "color": "Ciemny"},
@@ -183,6 +190,7 @@ PRODUCTS = [
         "compare_price": None,
         "category": "Spodnie",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "DRS-CZR-S",   "size": "S",  "color": "Czarny"},
             {"sku": "DRS-CZR-M",   "size": "M",  "color": "Czarny"},
@@ -204,6 +212,7 @@ PRODUCTS = [
         "compare_price": 99.99,
         "category": "Spodnie",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "SZT-CZR-S",   "size": "S",  "color": "Czarny"},
             {"sku": "SZT-CZR-M",   "size": "M",  "color": "Czarny"},
@@ -225,6 +234,7 @@ PRODUCTS = [
         "compare_price": 359.99,
         "category": "Buty",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "SNK-BIA-39", "size": "39", "color": "Biały"},
             {"sku": "SNK-BIA-40", "size": "40", "color": "Biały"},
@@ -242,6 +252,7 @@ PRODUCTS = [
         "compare_price": 479.99,
         "category": "Buty",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "BIE-CZR-40", "size": "40", "color": "Czarny"},
             {"sku": "BIE-CZR-42", "size": "42", "color": "Czarny"},
@@ -262,6 +273,7 @@ PRODUCTS = [
         "compare_price": None,
         "category": "Buty",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "TRM-BIA-39", "size": "39", "color": "Biały"},
             {"sku": "TRM-BIA-40", "size": "40", "color": "Biały"},
@@ -284,6 +296,7 @@ PRODUCTS = [
         "compare_price": 69.99,
         "category": "Akcesoria",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "CAP-CZR-OS", "size": "One Size", "color": "Czarny"},
             {"sku": "CAP-SZR-OS", "size": "One Size", "color": "Szary"},
@@ -299,6 +312,7 @@ PRODUCTS = [
         "compare_price": 199.99,
         "category": "Akcesoria",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "PLK-CZR-OS", "size": "One Size", "color": "Czarny"},
             {"sku": "PLK-GRN-OS", "size": "One Size", "color": "Granatowy"},
@@ -313,6 +327,7 @@ PRODUCTS = [
         "compare_price": 39.99,
         "category": "Akcesoria",
         "brand": "Mercha",
+        "image": "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=600&h=600&fit=crop",
         "variants": [
             {"sku": "SKR-S-BIA", "size": "S", "color": "Biały"},
             {"sku": "SKR-M-BIA", "size": "M", "color": "Biały"},
@@ -356,13 +371,17 @@ async def seed(db: AsyncSession) -> None:
     products = []
     all_variants = []
     variants_by_product = []
+    images_to_create = []
     for p_data in PRODUCTS:
         cat_id = cat_map[p_data.pop("category")]
         variants_data = p_data.pop("variants")
+        image_url = p_data.pop("image", None)
         product = Product(**p_data, category_id=cat_id)
         products.append(product)
         variants_by_product.append(variants_data)
         db.add(product)
+        if image_url:
+            images_to_create.append((product, image_url))
 
     await db.flush()
 
@@ -371,6 +390,16 @@ async def seed(db: AsyncSession) -> None:
             variant = ProductVariant(**v_data, product_id=product.id)
             all_variants.append(variant)
             db.add(variant)
+
+    # ── Product images ──────────────────────────────────────────────────
+    for product, image_url in images_to_create:
+        alt = product.name
+        db.add(ProductImage(
+            product_id=product.id,
+            image=image_url,
+            alt_text=alt,
+            is_primary=True,
+        ))
 
     await db.flush()
     logger.info("Added %d products with %d variants.", len(products), len(all_variants))
@@ -398,8 +427,8 @@ async def seed(db: AsyncSession) -> None:
 
     await db.commit()
     print(f"✓ Dodano {len(categories)} kategorii, {len(products)} produktów, "
-          f"{len(all_variants)} wariantów, {len(locations)} lokalizacji "
-          f"magazynowych i {inventory_count} stanów magazynowych.")
+          f"{len(all_variants)} wariantów, {len(images_to_create)} zdjęć, "
+          f"{len(locations)} lokalizacji magazynowych i {inventory_count} stanów magazynowych.")
 
 
 async def main():

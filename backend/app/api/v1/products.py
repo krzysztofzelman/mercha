@@ -43,10 +43,12 @@ async def list_products(
     results = []
     for p in products:
         cat_name = p.category.name if p.category else None
+        primary = next((img.image for img in p.images if img.is_primary), p.images[0].image if p.images else None)
         results.append(ProductListItem(
             id=p.id, name=p.name, slug=p.slug, price=float(p.price),
             compare_price=float(p.compare_price) if p.compare_price else None,
             brand=p.brand, category_name=cat_name, has_variants=len(p.variants) > 0,
+            image=primary,
         ))
     return PaginatedResponse(count=total, results=[r.model_dump() for r in results], page=page, page_size=page_size)
 

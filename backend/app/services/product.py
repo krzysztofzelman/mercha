@@ -32,7 +32,7 @@ async def list_products(db: AsyncSession, search: str = "", category_id: int | N
         query = query.where(Product.category_id == category_id)
         count_q = count_q.where(Product.category_id == category_id)
     total = (await db.execute(count_q)).scalar() or 0
-    query = query.options(selectinload(Product.category), selectinload(Product.variants))
+    query = query.options(selectinload(Product.category), selectinload(Product.variants), selectinload(Product.images))
     query = query.order_by(Product.id.desc()).offset((page - 1) * page_size).limit(page_size)
     result = await db.execute(query)
     return result.scalars().all(), total

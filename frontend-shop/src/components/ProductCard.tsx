@@ -8,15 +8,20 @@ interface ProductCardProps {
   brand: string
   category_name?: string | null
   has_variants: boolean
+  image?: string | null
 }
 
-export default function ProductCard({ id, name, price, compare_price, brand, category_name, has_variants }: ProductCardProps) {
+export default function ProductCard({ id, name, price, compare_price, brand, category_name, has_variants, image }: ProductCardProps) {
   const discount = compare_price ? Math.round((1 - price / compare_price) * 100) : 0
 
   return (
     <Link to={`/products/${id}`} className="group bg-white rounded-lg shadow-sm border border-secondary-200 overflow-hidden hover:shadow-md transition">
-      <div className="h-48 bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center">
-        <span className="text-4xl text-brand-400">🧵</span>
+      <div className="h-48 bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center overflow-hidden">
+        {image ? (
+          <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        ) : (
+          <span className="text-4xl text-brand-400">🧵</span>
+        )}
       </div>
       <div className="p-4">
         {category_name && (
