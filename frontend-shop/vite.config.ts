@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    allowedHosts: ['mercha.kzelman.pl'],
     proxy: {
       '/api': process.env.VITE_API_URL || 'http://localhost:8000',
     },
